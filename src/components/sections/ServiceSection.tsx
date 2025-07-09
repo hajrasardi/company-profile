@@ -5,12 +5,12 @@ import * as motion from "motion/react-client";
 import Link from "next/link";
 
 const services = [
-  "Travel Pekanbaru-Dumai",
-  "Travel Pekanbar-Duri",
-  "Travel Pekanbaru-Kandis",
-  "Travel Kandis-Pekanbaru",
-  "Travel Duri-Pekanbaru",
-  "Travel Dumai-Pekanbaru",
+  "Travel Pekanbaru-Dumai dengan harga Rp. 150.000,- dan ",
+  "Travel Pekanbar-Duri dengan harga Rp. 140.000,- dan ",
+  "Travel Pekanbaru-Kandis dengan harga Rp. 130.000,- dan ",
+  "Travel Kandis-Pekanbaru dengan harga Rp. 130.000,- dan ",
+  "Travel Duri-Pekanbaru dengan harga Rp. 140.000,- dan ",
+  "Travel Dumai-Pekanbaru dengan harga Rp. 150.000,- dan",
 ];
 
 export default function ServiceSection() {
@@ -55,10 +55,10 @@ export default function ServiceSection() {
             </p>
             <div className="mt-6 mb-3">
               <Link
-                href="#"
+                href="https://wa.me/6282387100688"
                 className="bg-slate-700 text-white text-center p-3 rounded-xl hover:bg-slate-600"
               >
-                Lihat website
+                Hubungi Kami
               </Link>
             </div>
           </motion.div>

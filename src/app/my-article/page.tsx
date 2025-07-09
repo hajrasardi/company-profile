@@ -61,7 +61,7 @@ const PostPage: React.FunctionComponent = () => {
       return (
         <div
           key={idx}
-          className="w-full p-4 flex items-center rounded-md bg-white cursor-pointer"
+          className="w-full flex items-center rounded-md bg-white cursor-pointer"
         >
           <div className="w-full rounded-e-xl">
             <h4
@@ -117,7 +117,7 @@ const PostPage: React.FunctionComponent = () => {
   };
 
   return (
-    <div id="timeline" className="w-full md:flex gap-4">
+    <div id="timeline" className="w-full md:flex gap-4 pt-52">
       <div className="lg:w-1/2 items-center">
         <div className="w-full bg-white md:p-3 rounded-lg shadow-md">
           <input

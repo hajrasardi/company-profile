@@ -1,16 +1,19 @@
 "use client";
-import * as React from "react";
+import React from "react";
 import Link from "next/link";
-import { FaSearch } from "react-icons/fa";
+import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { setSignIn, setSignOut } from "@/lib/redux/features/userSlice";
-import { Button } from "@/components/ui/button";
 import apiCall from "./helper/apiCall";
-import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { FaBars, FaTimes } from "react-icons/fa";
 
-const Navbar: React.FunctionComponent = () => {
-  const userMail = useAppSelector((state) => state.userReducer.email);
+const Navbar: React.FC = () => {
   const dispatch = useAppDispatch();
+  const userMail = useAppSelector((state) => state.userReducer.email);
+  const [menuOpen, setMenuOpen] = React.useState(false);
+
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   const keepLogin = async () => {
     try {
@@ -20,155 +23,165 @@ const Navbar: React.FunctionComponent = () => {
         dispatch(setSignIn(res.data));
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
   React.useEffect(() => {
     keepLogin();
-  });
+  }, []);
+
+  const handleSignOut = () => {
+    dispatch(setSignOut());
+    localStorage.removeItem("tkn");
+    setMenuOpen(false);
+  };
 
   return (
-    <div className="flex items-center justify-between px-6 lg:px-24 py-5">
-      <div className="logo">
-        <Image
-          src="/logo-mutiara-travel.png"
-          alt="Mutiara Travel Logo"
-          width={120}
-          height={40}
-          className="object-contain"
-        />
-      </div>
-      <ul className="flex items-center gap-5">
-        <li>
-          <Link href={"/"}>Home</Link>
-        </li>
-        <li>
-          <Link href={"#profile"}>Our Profile</Link>
-        </li>
-        <li>
-          <Link href={"#service"}>Our Service</Link>
-        </li>
-        <li>
-          <Link href={"#contact"}>Contact</Link>
-        </li>
-        <li>
-          <Link href={"/blog"}>Artikel</Link>
-        </li>
-        <li className="flex items-center gap-2">
+    <nav className="w-full bg-white shadow-md fixed top-0 left-0 z-50">
+      <div className="container mx-auto flex items-center justify-between px-4 py-4 lg:px-24">
+        {/* Logo */}
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo-mutiara-travel.png"
+            alt="Logo"
+            width={120}
+            height={40}
+            className="object-contain"
+          />
+        </Link>
+
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex items-center gap-6 text-gray-700 font-medium">
+          <li>
+            <Link href="/">Home</Link>
+          </li>
+          <li>
+            <Link href="#profile">Our Profile</Link>
+          </li>
+          <li>
+            <Link href="#service">Our Service</Link>
+          </li>
+          <li>
+            <Link href="#contact">Contact</Link>
+          </li>
+          <li>
+            <Link href="/blog">Artikel</Link>
+          </li>
           {userMail ? (
-            <div className="flex gap-2 items-center">
+            <li className="flex items-center gap-3">
               <Link href="/my-article">My Article</Link>
-              <p>{userMail}</p>
+              <span className="text-sm font-light text-blue-400">
+                {userMail}
+              </span>
               <Button
-                type="button"
-                onClick={() => {
-                  dispatch(setSignOut());
-                  localStorage.removeItem("tkn");
-                }}
+                className="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700"
+                onClick={handleSignOut}
               >
                 Sign Out
               </Button>
-            </div>
+            </li>
           ) : (
-            <>
+            <li className="flex gap-3">
               <Link
                 href="/sign-up"
-                className="bg-slate-200 text-slate-700 px-3 py-1 rounded-md shadow"
+                className="bg-slate-200 px-4 py-1 rounded hover:bg-slate-300"
               >
                 Sign Up
               </Link>
               <Link
                 href="/sign-in"
-                className="bg-slate-700 text-white px-3 py-1 rounded-md shadow"
+                className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700"
               >
                 Sign In
               </Link>
+            </li>
+          )}
+        </ul>
+
+        {/* Mobile Toggle */}
+        <button
+          className="md:hidden text-2xl text-gray-700"
+          onClick={toggleMenu}
+        >
+          {menuOpen ? <FaTimes /> : <FaBars />}
+        </button>
+      </div>
+
+      {/* Mobile Dropdown Menu */}
+      <div
+        className={`md:hidden bg-white w-full px-6 pb-4 transition-all duration-300 ease-in-out ${
+          menuOpen
+            ? "max-h-[500px] opacity-100"
+            : "max-h-0 overflow-hidden opacity-0"
+        }`}
+      >
+        <ul className="flex flex-col gap-4 text-gray-700">
+          <li>
+            <Link href="/" onClick={toggleMenu}>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link href="#profile" onClick={toggleMenu}>
+              Our Profile
+            </Link>
+          </li>
+          <li>
+            <Link href="#service" onClick={toggleMenu}>
+              Our Service
+            </Link>
+          </li>
+          <li>
+            <Link href="#contact" onClick={toggleMenu}>
+              Contact
+            </Link>
+          </li>
+          <li>
+            <Link href="/blog" onClick={toggleMenu}>
+              Artikel
+            </Link>
+          </li>
+          {userMail ? (
+            <>
+              <li>
+                <Link href="/my-article" onClick={toggleMenu}>
+                  My Article
+                </Link>
+              </li>
+              <li className="text-sm">{userMail}</li>
+              <li>
+                <Button onClick={handleSignOut} className="w-full">
+                  Sign Out
+                </Button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link
+                  href="/sign-up"
+                  className="block text-center bg-slate-200 px-4 py-2 rounded hover:bg-slate-300"
+                  onClick={toggleMenu}
+                >
+                  Sign Up
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/sign-in"
+                  className="block text-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                  onClick={toggleMenu}
+                >
+                  Sign In
+                </Link>
+              </li>
             </>
           )}
-        </li>
-      </ul>
-    </div>
+        </ul>
+      </div>
+    </nav>
   );
 };
 
 export default Navbar;
-
-// import Image from "next/image";
-// import React from "react";
-// import apiCall from "./helper/apiCall";
-// import { setSignIn } from "@/lib/redux/features/userSlice";
-// import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
-// import Link from "next/link";
-
-// const Navbar: React.FunctionComponent = () => {
-//   const userMail = useAppSelector((state) => state.userReducer.email);
-//   const dispatch = useAppDispatch();
-
-//   // ✅ Tambahkan useState untuk toggle menu mobile
-//   const [active, setActive] = React.useState(false);
-
-//   // ✅ Fungsi toggle menu
-//   const handleClick = () => setActive(!active);
-
-//   const keepLogin = async () => {
-//     try {
-//       const tkn = localStorage.getItem("tkn");
-//       if (tkn) {
-//         const res = await apiCall.get(`/accounts/${tkn}`);
-//         dispatch(setSignIn(res.data));
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-//   React.useEffect(() => {
-//     keepLogin();
-//   }, []); // ✅ Tambahkan dependency array agar tidak terpanggil terus-menerus
-
-//   return (
-//     <div className="navbar py-6">
-//       <div className="container mx-auto px-4">
-//         <div className="navbar-box flex items-center justify-between">
-//           <div className="logo">
-//             <Image
-//               src="/logo-mutiara-travel.png"
-//               alt="Mutiara Travel Logo"
-//               width={120}
-//               height={40}
-//               className="object-contain"
-//             />
-//           </div>
-//           <ul
-//             className={`menu flex items-center gap-12 md:static absolute ${
-//               active ? "top-24 opacity-100" : "top-20 opacity-0"
-//             } left-1/2 -translate-x-1/2 md:-translate-x-0 md:flex-row flex-col md:bg-transparent bg-slate-700 w-full md:w-auto md:py-0 py-10 text-white md:text-black transition-all md:opacity-100 md:transition-none md:text-base text-xl`}
-//           >
-//             <li>
-//               <Link href={"/"}>Home</Link>
-//             </li>
-//             <li>
-//               <Link href={"#profile"}>Our Profile</Link>
-//             </li>
-//             <li>
-//               <Link href={"#service"}>Our Service</Link>
-//             </li>
-//             <li>
-//               <Link href={"#contact"}>Contact</Link>
-//             </li>
-//             <li>
-//               <Link href={"/sign-in"}>Sign in</Link>
-//             </li>
-//             <li>
-//               <Link href={"/sign-up"}>Sign up</Link>
-//             </li>
-//           </ul>
-//           <div className="md:hidden block" onClick={handleClick}>
-//             <i className="ri-menu-3-line ri-2x font-bold"></i>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };

@@ -39,7 +39,7 @@ const Home: React.FunctionComponent = () => {
         return (
           <div
             key={val.objectId}
-            className="h-72 items-center bg-white rounded-xl cursor-pointer"
+            className="h-72 items-center bg-white rounded-xl cursor-pointer pt-50"
             onClick={() => router.push(`/article/${val.title}`)}
           >
             <div className="relative h-36 w-full">

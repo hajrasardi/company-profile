@@ -50,7 +50,7 @@ const SignInPage = () => {
   }, []);
 
   return (
-    <div className="h-screen px-10">
+    <div className="h-screen px-10 pt-50">
       <div className="container m-auto flex flex-col md:flex-row items-center gap-5 md:gap-16">
         <div className="w-full md:w-1/2 order-2 md:order-1 rounded-2xl px-5 py-8 bg-white">
           <h1 className="text-2xl">Sign in</h1>

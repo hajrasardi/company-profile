@@ -62,7 +62,7 @@ const SignUpPage: React.FunctionComponent = () => {
   };
 
   return (
-    <div className="h-screen px-10">
+    <div className="h-screen px-10 pt-50">
       <div className="container m-auto flex flex-col md:flex-row items-center gap-5 md:gap-16">
         {/* Kiri */}
         <div className="w-full md:w-1/2 flex flex-col justify-center md:space-y-5 order-2 md:order-1">
