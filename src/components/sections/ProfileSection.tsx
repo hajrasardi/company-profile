@@ -16,9 +16,53 @@ export default function ProfileSection() {
             <p>Sekapur sirih.</p>
             <p>Bismillahirrahmaanirrahiim</p>
             <p>Assalammualaikum Warahmatullahi Wabarakatuh.</p>
+            <p>Bersyukur kami panjatkan kepada Allah SWT.</p>
             <p>
-              Bersyukur kami panjatkan kepada Allah SWT [...] Lorem ipsum dolor
-              sit amet consectetur adipisicing elit. Consequatur, dolorum.
+              Atas izin Allah SWT,beserta rekan dan kerabat juga didukung
+              pelanggan setia yang telah menggunakan jasa kami. CV. Mutia Car
+              Rent (MCR) kini hadir dengan layanan travel jurusan Pekanbaru –
+              Dumai (MUTIARA TRAVEL) dengan Armada New Kijang Innova.
+            </p>
+            <p>
+              MUTIARA TRAVEL hadir seiring tingginya tingkat kebutuhan
+              masyarakat saat ini dalam memerlukan sarana penunjang transportasi
+              perjalanan,kami hadir untuk membantu, memfasilitasi, serta
+              mencarikan solusi terbaik kepada masyarakat dalam merencanakan
+              perjalanan yang direncanakan sehingga perjalanan tersebut menjadi
+              nyaman, aman, dan mendapatkan nilai kesan yang baik dalam setiap
+              perjalanan.di samping itu kami juga mempunyai visi dan misi
+              sebagai berikut:
+            </p>
+            <h3>Visi :</h3>
+            <p>
+              Menjadikan Perusahaan Jasa Transportasi yang Handal Dengan
+              Mengutamakan Layananan Berkualitas Kepada Pelanggan.
+            </p>
+            <h3>Misi</h3>
+            <ol className="list-decimal pl-6 space-y-2">
+              <li>
+                Menjadi Perusahaan Penyedia Transportasi Dengan Kualitas Layanan
+                Prima
+              </li>
+              <li>
+                Menjadi Perusahaan yang Selalu Memberikan Kenyamanan, Keamanan
+                Penumpang yang akan Melakukan Perjalanan.
+              </li>
+              <li>
+                Mengedepankan Kepuasan, Menggaransi Uang Pembelian Tiket Kembali
+                Apabila Terjadi Kelalaian Kami
+              </li>
+            </ol>
+            <p>
+              Kami sangat mengharapkan kerjasama yang sudah terjalin tetap
+              terjaga dengan baik dan lebih meninggkat di masa mendatang,Melalui
+              ini kami berharap dapat memudahkan Anda untuk mendapatkan
+              informasi yang lengkap mengenai layanan dan travel yang kami
+              miliki.
+            </p>
+            <p>
+              Berikut beberapa perusahaan/Instansi yang telah menggunakan jasa
+              kami:
             </p>
           </div>
           <Image
